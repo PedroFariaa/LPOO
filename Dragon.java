@@ -1,7 +1,7 @@
-public class Hero{
+public class Dragon{
 	public int linha=1;
 	public int coluna=1;
-	public boolean armado;
+	public boolean vivo;
 	
 	public int getLinha(){
 		return linha;
@@ -9,8 +9,8 @@ public class Hero{
 	public int getColuna(){
 		return coluna;
 	}
-	public boolean getArmado(){
-		return armado;
+	public boolean getVivo(){
+		return vivo;
 	}
 	
 	public void setLinha(int nline){
@@ -19,27 +19,23 @@ public class Hero{
 	public void setColuna(int ncol){
 		this.coluna=ncol;
 	}
-	public void setArmado(boolean arm){
-		this.armado=arm;
+	public void setVivo(boolean vivo){
+		this.vivo=vivo;
 	}
 	
 	public void HeroMovement(){
-		char jogada = 'a';
+		char jogada='0';
 		switch(jogada){
-		case 'd':
-		case 'D':
+		case '0':
 			this.setLinha(this.getLinha()+1);
 			break;
-		case 'a':
-		case 'A':
+		case '1':
 			this.setLinha(this.getLinha()-1);
 			break;
-		case 'w':
-		case 'W':
+		case '2':
 			this.setColuna(this.getLinha()+1);
 			break;
-		case 's':
-		case 'S':
+		case '3':
 			this.setColuna(this.getLinha()-1);
 			break;
 		}
