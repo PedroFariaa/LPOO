@@ -23,22 +23,8 @@ public class Dragon{
 		this.vivo=vivo;
 	}
 	
-	public void HeroMovement(){
-		char jogada='0';
-		switch(jogada){
-		case '0':
-			this.setLinha(this.getLinha()+1);
-			break;
-		case '1':
-			this.setLinha(this.getLinha()-1);
-			break;
-		case '2':
-			this.setColuna(this.getLinha()+1);
-			break;
-		case '3':
-			this.setColuna(this.getLinha()-1);
-			break;
-		}
+	public  static void main(String[] args){
+		
 	}
 	
 }
