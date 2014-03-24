@@ -32,7 +32,7 @@ public class Hero extends Elements{
 		
 	}
 	
-	public void movement(String input){
+	public void movement(String input, Eagle bird){
 		if(this.get_alive()==true /*&& (!EndGame())*/){
 			switch(input){
 			case "s":
@@ -77,6 +77,14 @@ public class Hero extends Elements{
 					if(this.getArmado()==true){
 						lab.labirinth[this.get_x()][this.get_y()]='A';
 					}
+				}
+				break;
+			case "e":
+			case "E":
+				if(!(this.get_x()==bird.get_x() & this.get_y()==bird.get_y())){
+					bird.set_initial_x(this.get_x());
+					bird.set_initial_y(this.get_y());
+					bird.setTravelling();
 				}
 				break;
 			}

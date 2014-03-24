@@ -8,6 +8,7 @@ public class Eagle extends Elements{
 	private boolean travelling=false;
 	private int initial_x;
 	private int initial_y;
+	private char previous_cell;
 	
 	public Eagle(Labirinth lab, Hero heroi){
 		this.lab=lab;
@@ -43,7 +44,7 @@ public class Eagle extends Elements{
 	
 	public void Movement(Sword espada){
 		if(this.has_sword){
-			this.return_movement();
+			this.return_movement(espada);
 		}else{
 			this.movement(espada);
 		}
@@ -86,14 +87,16 @@ public class Eagle extends Elements{
 		}
 	}
 
-	public void return_movement(){
+	public void return_movement(Sword espada){
 		if(this.get_alive()==true){
 			//mesma linha
 			if(this.get_x() == initial_x){
 				if(initial_x > this.get_x()){
 					this.set_x(this.get_x()+1);
+					espada.set_x(this.get_x()+1);
 				}else{
 					this.set_x(this.get_x()-1);
+					espada.set_x(this.get_x()-1);
 				}
 			}
 			
@@ -101,8 +104,10 @@ public class Eagle extends Elements{
 			else if(this.get_y() == initial_y){
 				if(initial_y > this.get_y()){
 					this.set_y(this.get_y()+1);
+					espada.set_y(this.get_y()+1);
 				}else{
 					this.set_y(this.get_y()-1);
+					espada.set_y(this.get_y()-1);
 				}
 			}
 			
@@ -110,15 +115,23 @@ public class Eagle extends Elements{
 			else if((this.get_x() > initial_x) && (this.get_y() > initial_y)){
 				this.set_x(this.get_x()+1);
 				this.set_y(this.get_y()+1);
+				espada.set_x(this.get_x()+1);
+				espada.set_y(this.get_y()+1);
 			}else if((this.get_x() > initial_x) && (this.get_y() < initial_y)){
 				this.set_x(this.get_x()+1);
 				this.set_y(this.get_y()-1);
+				espada.set_x(this.get_x()+1);
+				espada.set_y(this.get_y()-1);
 			}else if((this.get_x() < initial_x) && (this.get_y() > initial_y)){
 				this.set_x(this.get_x()-1);
 				this.set_y(this.get_y()+1);
+				espada.set_x(this.get_x()-1);
+				espada.set_y(this.get_y()+1);
 			}else if((this.get_x() < initial_x) && (this.get_y() < initial_y)){
 				this.set_x(this.get_x()-1);
 				this.set_y(this.get_y()-1);
+				espada.set_x(this.get_x()-1);
+				espada.set_y(this.get_y()-1);
 			}
 		}
 	}
@@ -128,10 +141,17 @@ public class Eagle extends Elements{
 		return travelling;
 	}
 	
+	//true when the player press the 'e' key until the bird return to the initial position with the sword
 	public void setTravelling() {
-		if((this.get_x() != this.initial_x) || (this.get_y() != this.initial_y)){
-			this.travelling=true;
-		}
+		this.travelling=true;
+	}
+
+	public void set_initial_x(int x) {
+		this.initial_x=x;		
+	}
+
+	public void set_initial_y(int y) {
+		this.initial_y=y;
 	}
 	
 }

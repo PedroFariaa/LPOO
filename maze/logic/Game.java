@@ -5,11 +5,12 @@ import java.util.Scanner;
 public class Game{
 
 	Labirinth lab = new Labirinth();
+	Dragon drag = new Dragon(lab);
 	Sword espada = new Sword(lab);
 	Hero heroi = new Hero(lab);
-	Dragon drag = new Dragon(lab);
 	Eagle bird = new Eagle(lab, heroi);
 	Display dis = new Display();
+	Elements exit = new Elements();
 	boolean FoundExit=false;
 	
 	
@@ -44,7 +45,7 @@ public class Game{
 		
 		//verifica espada
 		if(!heroi.getArmado()){
-			if(((lab.labirinth[heroi.get_x()+1][heroi.get_y()] == 'E')) || (lab.labirinth[heroi.get_x()-1][heroi.get_y()] == 'E') || (lab.labirinth[heroi.get_x()][heroi.get_y()+1] == 'E') || (lab.labirinth[heroi.get_x()][heroi.get_y()-1] == 'E')){
+			if(heroi.get_x()==espada.get_x() && heroi.get_y()==espada.get_y()){
 				heroi.setArmado();
 				espada.set_equiped(true);
 			}
@@ -52,46 +53,50 @@ public class Game{
 		
 		//verifica passaro
 		
-		//verifica se chegou à espada
 	}
 	
 	public static void main(String[] argc){
 		Game jogo = new Game();
 		jogo.espada.ShowSword(jogo.lab);
+		jogo.bird.ShowEagle(jogo.lab);
 		jogo.heroi.ShowHero(jogo.lab);
 		jogo.drag.ShowDragon(jogo.lab);
 		while(jogo.EndGame() == false){
-			jogo.dis.DisplayMap(jogo.lab);
+			jogo.dis.DisplayMap(jogo.lab, jogo.heroi, jogo.drag, jogo.espada);
 			String userInput;
 			Scanner scan = new Scanner (System.in);
 			userInput = scan.nextLine();  
 			jogo.drag.movement();
 			jogo.CheckPositions();
-			jogo.heroi.movement(userInput);
+			jogo.heroi.movement(userInput, jogo.bird);
+			jogo.CheckPositions();
+			if(jogo.bird.getTravelling()==true){
+				jogo.bird.Movement(jogo.espada);
+			}
 			jogo.CheckPositions();
 		}
 		while(jogo.FoundExit == false){
-			jogo.dis.DisplayMap(jogo.lab);
+			jogo.dis.DisplayMap(jogo.lab, jogo.heroi, jogo.drag, jogo.espada);
 			String userInput;
 			Scanner scan = new Scanner (System.in);
 			userInput = scan.nextLine();
-			jogo.heroi.movement(userInput);
+			jogo.heroi.movement(userInput, jogo.bird);
 			jogo.CheckExit();
 		}
 	}
 
 	private void CheckExit() {
-		int X_Exit=1, Y_Exit=1;
 		for(int i=0; i < lab.labirinth.length; i++){
 			for(int j=0; j < lab.labirinth.length; j++){
 				if(lab.labirinth[i][j] == 'S'){
-					X_Exit=i;
-					Y_Exit=j;
+					exit.set_x(i);
+					exit.set_y(j);
 					break;
 				}
 			}
 		}
-		if(lab.labirinth[X_Exit][Y_Exit]=='A'){
+		if(lab.labirinth[exit.get_x()][exit.get_y()]=='A'){
+			System.out.println("You are at least free!");
 			FoundExit = true;
 		}
 	}
