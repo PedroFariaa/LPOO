@@ -44,32 +44,32 @@ public class Eagle extends Elements{
 	
 	public void Movement(Sword espada){
 		if(this.has_sword){
-			this.return_movement(espada);
+			//this.return_movement(espada);
 		}else{
-			this.movement(espada);
+			this.going_movement(espada);
 		}
 	}
 	
-	public void movement(Sword espada){
+	public void going_movement(Sword espada){
 		if(this.get_alive()==true){
 			//mesma linha
 			if(this.get_x() == espada.get_x()){
-				if(espada.get_x() > this.get_x()){
+				if(espada.get_x() > this.get_x() && this.get_x()<9){
 					this.set_x(this.get_x()+1);
-				}else{
+				}else if(this.get_x() > 0){
 					this.set_x(this.get_x()-1);
 				}
 			}
 			
 			//mesma coluna
 			else if(this.get_y() == espada.get_y()){
-				if(espada.get_y() > this.get_y()){
+				if(espada.get_y() > this.get_y() && this.get_y()<9){
 					this.set_y(this.get_y()+1);
-				}else{
+				}else if(this.get_y() > 0){
 					this.set_y(this.get_y()-1);
 				}
 			}
-			
+			/*
 			//na diagonal
 			else if((this.get_x() > espada.get_x()) && (this.get_y() > espada.get_y())){
 				this.set_x(this.get_x()+1);
@@ -83,10 +83,12 @@ public class Eagle extends Elements{
 			}else if((this.get_x() < espada.get_x()) && (this.get_y() < espada.get_y())){
 				this.set_x(this.get_x()-1);
 				this.set_y(this.get_y()-1);
-			}
+			}*/
 		}
 	}
-
+			
+			
+/*
 	public void return_movement(Sword espada){
 		if(this.get_alive()==true){
 			//mesma linha
@@ -136,7 +138,7 @@ public class Eagle extends Elements{
 		}
 	}
 
-	
+	*/
 	public boolean getTravelling() {
 		return travelling;
 	}
@@ -146,12 +148,13 @@ public class Eagle extends Elements{
 		this.travelling=true;
 	}
 
-	public void set_initial_x(int x) {
-		this.initial_x=x;		
+	public void send_eagle(Hero h) {
+		initial_x=h.get_x();
+		initial_y=h.get_y();
 	}
-
-	public void set_initial_y(int y) {
-		this.initial_y=y;
+	
+	public boolean get_has_sword(){
+		return this.has_sword;
 	}
 	
 }
