@@ -81,11 +81,8 @@ public class Hero extends Elements{
 				break;
 			case "e":
 			case "E":
-				if(!(this.get_x()==bird.get_x() & this.get_y()==bird.get_y())){
-					bird.set_initial_x(this.get_x());
-					bird.set_initial_y(this.get_y());
-					bird.setTravelling();
-				}
+				bird.send_eagle(this);
+				bird.setTravelling();
 				break;
 			}
 		}

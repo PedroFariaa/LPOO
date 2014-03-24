@@ -17,7 +17,7 @@ public class Game{
 	public boolean EndGame(){
 		boolean end=false;
 		if(drag.get_alive()==false){
-				end=true;
+			end=true;
 		}else{
 			if(!heroi.get_alive()){
 				end=true;
@@ -55,35 +55,40 @@ public class Game{
 		
 	}
 	
-	public static void main(String[] argc){
-		Game jogo = new Game();
-		jogo.espada.ShowSword(jogo.lab);
-		jogo.bird.ShowEagle(jogo.lab);
-		jogo.heroi.ShowHero(jogo.lab);
-		jogo.drag.ShowDragon(jogo.lab);
-		while(jogo.EndGame() == false){
-			jogo.dis.DisplayMap(jogo.lab, jogo.heroi, jogo.drag, jogo.espada);
-			String userInput;
-			Scanner scan = new Scanner (System.in);
-			userInput = scan.nextLine();  
-			jogo.drag.movement();
-			jogo.CheckPositions();
-			jogo.heroi.movement(userInput, jogo.bird);
-			jogo.CheckPositions();
-			if(jogo.bird.getTravelling()==true){
-				jogo.bird.Movement(jogo.espada);
-			}
-			jogo.CheckPositions();
-		}
-		while(jogo.FoundExit == false){
-			jogo.dis.DisplayMap(jogo.lab, jogo.heroi, jogo.drag, jogo.espada);
+	public Game(){
+		espada.ShowSword(lab);
+		bird.ShowEagle(lab);
+		heroi.ShowHero(lab);
+		drag.ShowDragon(lab);
+	}
+	
+	
+	public void PlayGame(){
+		while(EndGame() == false){
+			dis.DisplayMap(lab, heroi, drag, espada, bird);
 			String userInput;
 			Scanner scan = new Scanner (System.in);
 			userInput = scan.nextLine();
-			jogo.heroi.movement(userInput, jogo.bird);
-			jogo.CheckExit();
+			drag.movement();
+			CheckPositions();
+			heroi.movement(userInput, bird);
+			CheckPositions();
+			if(bird.getTravelling()==true){
+				bird.Movement(espada);
+				bird.ShowEagle(lab);
+			}
+			//CheckPositions_eagle();
+		}
+		while(FoundExit == false){
+			dis.DisplayMap(lab, heroi, drag, espada, bird);
+			String userInput;
+			Scanner scan = new Scanner (System.in);
+			userInput = scan.nextLine();
+			heroi.movement(userInput, bird);
+			CheckExit();
 		}
 	}
+	
 
 	private void CheckExit() {
 		for(int i=0; i < lab.labirinth.length; i++){
@@ -99,8 +104,7 @@ public class Game{
 			System.out.println("You are at least free!");
 			FoundExit = true;
 		}
-	}
-
+	}	
 	
 }
 
