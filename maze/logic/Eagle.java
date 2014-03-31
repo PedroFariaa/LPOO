@@ -55,9 +55,14 @@ public class Eagle extends Elements{
 			//mesma linha
 			if(this.get_x() == espada.get_x()){
 				if(espada.get_x() > this.get_x() && this.get_x()<9){
+					// analisar metodo
+					previous_cell = lab.labirinth[this.get_x()][this.get_y()];
 					this.set_x(this.get_x()+1);
+					lab.labirinth[this.get_x()-1][this.get_y()] = previous_cell;
 				}else if(this.get_x() > 0){
+					previous_cell = lab.labirinth[this.get_x()][this.get_y()];
 					this.set_x(this.get_x()-1);
+					lab.labirinth[this.get_x()+1][this.get_y()] = previous_cell;
 				}
 			}
 			
@@ -148,9 +153,9 @@ public class Eagle extends Elements{
 		this.travelling=true;
 	}
 
-	public void send_eagle(Hero h) {
-		initial_x=h.get_x();
-		initial_y=h.get_y();
+	public void send_eagle() {
+		this.initial_x=this.get_x();
+		this.initial_y=this.get_y();
 	}
 	
 	public boolean get_has_sword(){
