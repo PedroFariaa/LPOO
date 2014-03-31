@@ -25,12 +25,14 @@ public class Display{
 			if(drag.get_x()==s.get_x() && drag.get_y()==s.get_y()){
 				lab.labirinth[drag.get_x()][drag.get_y()] = 'F';
 			}
-		}else if(drag.get_alive()){
-			
-		}else if(!s.get_equiped()){
+		}else if(drag.get_alive() && !s.get_equiped()){
 			lab.labirinth[s.get_x()][s.get_y()] = 'E';
+		}else if(h.get_x()==s.get_x() && h.get_y()==s.get_y()){
+			lab.labirinth[s.get_x()][s.get_y()] = 'A';
+		}else{
+			lab.labirinth[s.get_x()][s.get_y()] = ' ';
 		}
-		if(e.get_alive() && e.getTravelling() && e.get_has_sword()==false){
+		if(e.get_alive() && e.getTravelling() && e.get_has_sword()==false && (e.get_x() != h.get_x() || h.get_y() != h.get_y())){
 			lab.labirinth[e.get_x()][e.get_y()] = 'B';
 		}
 	}	
