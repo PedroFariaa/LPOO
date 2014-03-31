@@ -87,6 +87,7 @@ public class Game{
 			heroi.movement(userInput, bird);
 			CheckExit();
 		}
+		
 	}
 	
 
@@ -101,6 +102,9 @@ public class Game{
 			}
 		}
 		if(lab.labirinth[exit.get_x()][exit.get_y()]=='A'){
+			lab.labirinth[heroi.get_x()][heroi.get_y()] = ' ';
+			lab.labirinth[exit.get_x()][exit.get_y()] = 'A';
+			dis.DisplayMap(lab, heroi, drag, espada, bird);
 			System.out.println("You are at least free!");
 			FoundExit = true;
 		}
