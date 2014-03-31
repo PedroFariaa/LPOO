@@ -33,13 +33,14 @@ public class Hero extends Elements{
 	}
 	
 	public void movement(String input, Eagle bird){
-		if(this.get_alive()==true /*&& (!EndGame())*/){
+		if(this.get_alive()==true){
 			switch(input){
 			case "s":
 			case "S":
 				if(!(lab.labirinth[this.get_x()+1][this.get_y()] == 'X') && this.get_x() < 9){
 					lab.labirinth[this.get_x()][this.get_y()]=' ';
 					this.set_x(this.get_x()+1);
+					bird.set_x(this.get_x());
 					lab.labirinth[this.get_x()][this.get_y()]='H';
 					if(this.getArmado()==true){
 						lab.labirinth[this.get_x()][this.get_y()]='A';
@@ -51,6 +52,7 @@ public class Hero extends Elements{
 				if(!(lab.labirinth[this.get_x()-1][this.get_y()] == 'X') && this.get_x() > 0){
 					lab.labirinth[this.get_x()][this.get_y()]=' ';
 					this.set_x(this.get_x()-1);
+					bird.set_x(this.get_x());
 					lab.labirinth[this.get_x()][this.get_y()]='H';
 					if(this.getArmado()==true){
 						lab.labirinth[this.get_x()][this.get_y()]='A';
@@ -62,6 +64,7 @@ public class Hero extends Elements{
 				if(!(lab.labirinth[this.get_x()][this.get_y()-1] == 'X') && this.get_y() > 0){
 					lab.labirinth[this.get_x()][this.get_y()]=' ';
 					this.set_y(this.get_y()-1);
+					bird.set_y(this.get_y());
 					lab.labirinth[this.get_x()][this.get_y()]='H';
 					if(this.getArmado()==true){
 						lab.labirinth[this.get_x()][this.get_y()]='A';
@@ -73,6 +76,7 @@ public class Hero extends Elements{
 				if(!(lab.labirinth[this.get_x()][this.get_y()+1] == 'X') && this.get_y() < 9){
 					lab.labirinth[this.get_x()][this.get_y()]=' ';
 					this.set_y(this.get_y()+1);
+					bird.set_y(this.get_y());
 					lab.labirinth[this.get_x()][this.get_y()]='H';
 					if(this.getArmado()==true){
 						lab.labirinth[this.get_x()][this.get_y()]='A';
@@ -81,7 +85,7 @@ public class Hero extends Elements{
 				break;
 			case "e":
 			case "E":
-				bird.send_eagle(this);
+				bird.send_eagle();
 				bird.setTravelling();
 				break;
 			}
@@ -96,7 +100,8 @@ public class Hero extends Elements{
 		this.armado=true;
 	}
 	
-	public void EquipHero(){
+	public void EquipHero(Sword s){
+		/*
 		for(int i=0; i< lab.labirinth.length; i++){
 			for(int j=0; j<lab.labirinth.length; j++){
 				if(lab.labirinth[i][j]=='E'){
@@ -105,6 +110,12 @@ public class Hero extends Elements{
 					}	
 				}
 			}
+		}
+		*/
+		// Outra forma de equipar a espada - ainda por testar
+		if(this.get_x()==s.get_x() && this.get_y()==s.get_y()){
+			this.setArmado();
+			s.get_equiped();
 		}
 	}
 	
