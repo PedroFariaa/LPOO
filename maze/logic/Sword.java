@@ -1,7 +1,7 @@
 package maze.logic;
 
 public class Sword extends Elements{
-	private boolean equiped;
+	private boolean equiped;	
 	
 	public Sword(Labirinth lab){
 		this.randomPos(lab);

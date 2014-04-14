@@ -1,10 +1,12 @@
 package maze.logic;
 
+import java.util.Vector;
+
 public class Display{
-	
-	public void DisplayMap(Labirinth lab, Hero h, Dragon drag, Sword s, Eagle e){
+
+	public void DisplayMap(Labirinth lab, Hero h, Vector<Dragon> drag, Sword s, Eagle e){
 		DrawAllElements(lab, h, drag, s, e);
-		
+
 		for(int i=0; i< lab.labirinth.length; i++){
 			for(int j=0; j<lab.labirinth[i].length; j++){
 				System.out.print(lab.labirinth[i][j]+" ");
@@ -13,7 +15,11 @@ public class Display{
 		}
 	}
 
-	private void DrawAllElements(Labirinth lab, Hero h, Dragon drag, Sword s, Eagle e) {
+
+	// ADAPT FUNCTION SO IT CAN DRAW MULTIPLE DRAGONS
+	private void DrawAllElements(Labirinth lab, Hero h, Vector<Dragon> drag, Sword s, Eagle e) {
+
+		//draws the Hero
 		if(h.get_alive()){
 			if(h.getArmado()){
 				lab.labirinth[h.get_x()][h.get_y()] = 'A';
@@ -21,17 +27,31 @@ public class Display{
 				lab.labirinth[h.get_x()][h.get_y()] = 'H';
 			}
 		}
-		if(drag.get_alive() && !s.get_equiped()){
-			if(drag.get_x()==s.get_x() && drag.get_y()==s.get_y()){
-				lab.labirinth[drag.get_x()][drag.get_y()] = 'F';
-			}
-		}else if(drag.get_alive() && !s.get_equiped()){
-			lab.labirinth[s.get_x()][s.get_y()] = 'E';
-		}else if(h.get_x()==s.get_x() && h.get_y()==s.get_y()){
-			lab.labirinth[s.get_x()][s.get_y()] = 'A';
-		}else{
-			lab.labirinth[s.get_x()][s.get_y()] = ' ';
+
+		//draws the sword
+		if(!s.get_equiped()){
+			lab.labirinth[s.get_x()][s.get_y()] = 'S';
 		}
+		
+		//draws the dragon(s)
+		for(int i=0; i<drag.size(); i++){
+			if(drag.get(i).get_alive()){
+				lab.labirinth[drag.get(i).get_x()][drag.get(i).get_y()] = 'D';
+			}
+			if(drag.get(i).get_alive() && !s.get_equiped()){
+				if(drag.get(i).get_x()==s.get_x() && drag.get(i).get_y()==s.get_y()){
+					lab.labirinth[drag.get(i).get_x()][drag.get(i).get_y()] = 'F';
+				}
+			}else if(drag.get(i).get_alive() && !s.get_equiped()){
+				lab.labirinth[s.get_x()][s.get_y()] = 'E';
+			}else if(h.get_x()==s.get_x() && h.get_y()==s.get_y()){
+				lab.labirinth[s.get_x()][s.get_y()] = 'A';
+			}else{
+				lab.labirinth[s.get_x()][s.get_y()] = ' ';
+			}
+		}
+
+		//draws the eagle
 		if(e.get_alive() && e.getTravelling() && e.get_has_sword()==false && (e.get_x() != h.get_x() || h.get_y() != h.get_y())){
 			lab.labirinth[e.get_x()][e.get_y()] = 'B';
 		}

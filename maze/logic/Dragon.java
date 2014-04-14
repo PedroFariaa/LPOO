@@ -1,5 +1,7 @@
 package maze.logic;
 
+import java.util.ArrayList;
+
 public class Dragon extends Elements{
 	private boolean alive;
 	private boolean asleep;
@@ -11,7 +13,7 @@ public class Dragon extends Elements{
 		this.alive=true;
 		this.asleep=false;
 	}
-	
+
 	public void set_alive(boolean alive){
 		this.alive=alive;
 	}
@@ -99,5 +101,12 @@ public class Dragon extends Elements{
 			}
 		}
 		System.out.println("The Dragon Was Killed!");
+	}
+	
+	void placeDragons(ArrayList<Dragon> d, int numb, Labirinth lab){
+		for(int i=0; i<numb; i++){
+			Dragon d1 = new Dragon(lab);
+			d.add(d1);
+		}
 	}
 }
