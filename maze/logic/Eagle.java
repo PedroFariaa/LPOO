@@ -56,36 +56,48 @@ public class Eagle extends Elements{
 			if(this.get_x() == espada.get_x()){
 				if(espada.get_y() > this.get_y()){
 					// analisar metodo
-					previous_cell = lab.getLabyrinth()[this.get_x()][this.get_y()];
+					lab.getLabyrinth()[this.get_x()][this.get_y()]=previous_cell;
+					previous_cell=lab.getLabyrinth()[this.get_x()][this.get_y()+1];
 					this.set_y(this.get_y()+1);
-					lab.getLabyrinth()[this.get_x()-1][this.get_y()] = previous_cell;
 				}else{
-					previous_cell = lab.getLabyrinth()[this.get_x()][this.get_y()];
+					lab.getLabyrinth()[this.get_x()][this.get_y()]=previous_cell;
+					previous_cell=lab.getLabyrinth()[this.get_x()][this.get_y()-1];
 					this.set_y(this.get_y()-1);
-					lab.getLabyrinth()[this.get_x()+1][this.get_y()] = previous_cell;
 				}
 			}
 
 			//mesma coluna
 			else if(this.get_y() == espada.get_y()){
 				if(espada.get_x() > this.get_x()){
+					lab.getLabyrinth()[this.get_x()][this.get_y()]=previous_cell;
+					previous_cell=lab.getLabyrinth()[this.get_x()+1][this.get_y()];
 					this.set_x(this.get_x()+1);
 				}else{
+					lab.getLabyrinth()[this.get_x()][this.get_y()]=previous_cell;
+					previous_cell=lab.getLabyrinth()[this.get_x()-1][this.get_y()];
 					this.set_x(this.get_x()-1);
 				}
 			}
 
 			//na diagonal
 			else if((this.get_x() > espada.get_x()) && (this.get_y() > espada.get_y())){
+				lab.getLabyrinth()[this.get_x()][this.get_y()]=previous_cell;
+				previous_cell=lab.getLabyrinth()[this.get_x()-1][this.get_y()-1];
 				this.set_x(this.get_x()-1);
 				this.set_y(this.get_y()-1);
 			}else if((this.get_x() > espada.get_x()) && (this.get_y() < espada.get_y())){
+				lab.getLabyrinth()[this.get_x()][this.get_y()]=previous_cell;
+				previous_cell=lab.getLabyrinth()[this.get_x()-1][this.get_y()+1];
 				this.set_x(this.get_x()-1);
 				this.set_y(this.get_y()+1);
 			}else if((this.get_x() < espada.get_x()) && (this.get_y() > espada.get_y())){
+				lab.getLabyrinth()[this.get_x()][this.get_y()]=previous_cell;
+				previous_cell=lab.getLabyrinth()[this.get_x()+1][this.get_y()-1];
 				this.set_x(this.get_x()+1);
 				this.set_y(this.get_y()-1);
 			}else if((this.get_x() < espada.get_x()) && (this.get_y() < espada.get_y())){
+				lab.getLabyrinth()[this.get_x()][this.get_y()]=previous_cell;
+				previous_cell=lab.getLabyrinth()[this.get_x()+1][this.get_y()+1];
 				this.set_x(this.get_x()+1);
 				this.set_y(this.get_y()+1);
 			}
@@ -100,44 +112,60 @@ public class Eagle extends Elements{
 				this.KillsEagle(espada);
 			}
 			//mesma linha
-			else if(this.get_x() == espada.get_x()){
-				if(espada.get_y() > this.get_y()){
+			else if(this.get_x() == this.getInitialX()){
+				if(this.getInitialY() > this.get_y()){
+					lab.getLabyrinth()[this.get_x()][this.get_y()]=previous_cell;
+					previous_cell=lab.getLabyrinth()[this.get_x()][this.get_y()+1];
 					this.set_y(this.get_y()+1);
 					espada.set_y(this.get_y());
 				}else{
+					lab.getLabyrinth()[this.get_x()][this.get_y()]=previous_cell;
+					previous_cell=lab.getLabyrinth()[this.get_x()][this.get_y()-1];
 					this.set_y(this.get_y()-1);
 					espada.set_y(this.get_y());
 				}
 			}
 
 			//mesma coluna
-			else if(this.get_y() == espada.get_y()){
-				if(espada.get_x() > this.get_x()){
+			else if(this.get_y() == this.getInitialY()){
+				if(this.getInitialX() > this.get_x()){
+					lab.getLabyrinth()[this.get_x()][this.get_y()]=previous_cell;
+					previous_cell=lab.getLabyrinth()[this.get_x()+1][this.get_y()];
 					this.set_x(this.get_x()+1);
 					espada.set_x(this.get_x());
 				}else{
+					lab.getLabyrinth()[this.get_x()][this.get_y()]=previous_cell;
+					previous_cell=lab.getLabyrinth()[this.get_x()-1][this.get_y()];
 					this.set_x(this.get_x()-1);
 					espada.set_x(this.get_x());
 				}
 			}
 
 			//na diagonal
-			else if((this.get_x() > espada.get_x()) && (this.get_y() > espada.get_y())){
+			else if((this.get_x() > this.getInitialX()) && (this.get_y() > this.getInitialY())){
+				lab.getLabyrinth()[this.get_x()][this.get_y()]=previous_cell;
+				previous_cell=lab.getLabyrinth()[this.get_x()-1][this.get_y()-1];
 				this.set_x(this.get_x()-1);
 				this.set_y(this.get_y()-1);
 				espada.set_x(this.get_x());
 				espada.set_y(this.get_y());
-			}else if((this.get_x() > espada.get_x()) && (this.get_y() < espada.get_y())){
+			}else if((this.get_x() > this.getInitialX()) && (this.get_y() < this.getInitialY())){
+				lab.getLabyrinth()[this.get_x()][this.get_y()]=previous_cell;
+				previous_cell=lab.getLabyrinth()[this.get_x()-1][this.get_y()+1];
 				this.set_x(this.get_x()-1);
 				this.set_y(this.get_y()+1);
 				espada.set_x(this.get_x());
 				espada.set_y(this.get_y());
-			}else if((this.get_x() < espada.get_x()) && (this.get_y() > espada.get_y())){
+			}else if((this.get_x() < this.getInitialX()) && (this.get_y() > this.getInitialY())){
+				lab.getLabyrinth()[this.get_x()][this.get_y()]=previous_cell;
+				previous_cell=lab.getLabyrinth()[this.get_x()+1][this.get_y()-1];
 				this.set_x(this.get_x()+1);
 				this.set_y(this.get_y()-1);
 				espada.set_x(this.get_x());
 				espada.set_y(this.get_y());
-			}else if((this.get_x() < espada.get_x()) && (this.get_y() < espada.get_y())){
+			}else if((this.get_x() < this.getInitialX()) && (this.get_y() < this.getInitialY())){
+				lab.getLabyrinth()[this.get_x()][this.get_y()]=previous_cell;
+				previous_cell=lab.getLabyrinth()[this.get_x()+1][this.get_y()+1];
 				this.set_x(this.get_x()+1);
 				this.set_y(this.get_y()+1);
 				espada.set_x(this.get_x());
@@ -147,8 +175,12 @@ public class Eagle extends Elements{
 	}
 
 	public void KillsEagle(Sword espada) {
-		espada.set_x(this.get_x());
-		espada.set_y(this.get_y());
+		if(this.getHas_sword()){
+			espada.set_x(this.get_x());
+			espada.set_y(this.get_y());
+			espada.set_equiped(false);
+		}
+		this.setTravelling(false);
 		this.alive=false;
 	}
 
@@ -184,6 +216,10 @@ public class Eagle extends Elements{
 
 	public void setInitialY(int initialY) {
 		this.initialY = initialY;
+	}
+
+	public void setHas_Sword(boolean b) {
+		this.has_sword=b;
 	}
 
 }

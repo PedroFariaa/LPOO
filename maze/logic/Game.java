@@ -47,24 +47,22 @@ public class Game{
 	public void CheckPositions(){
 		//verifica dragao
 		for(int i=0; i<drag.size(); i++){
-			if(!drag.get(i).get_sleeping()){
-				if((lab.getLabyrinth()[heroi.get_x()+1][heroi.get_y()] == lab.getLabyrinth()[drag.get(i).get_x()][drag.get(i).get_y()]) || (lab.getLabyrinth()[heroi.get_x()-1][heroi.get_y()] == lab.getLabyrinth()[drag.get(i).get_x()][drag.get(i).get_y()]) || (lab.getLabyrinth()[heroi.get_x()][heroi.get_y()+1] == lab.getLabyrinth()[drag.get(i).get_x()][drag.get(i).get_y()]) || (lab.getLabyrinth()[heroi.get_x()][heroi.get_y()-1] == lab.getLabyrinth()[drag.get(i).get_x()][drag.get(i).get_y()]) || (lab.getLabyrinth()[heroi.get_x()][heroi.get_y()] == lab.getLabyrinth()[drag.get(i).get_x()][drag.get(i).get_y()])){
-					if(heroi.getArmado()){
-						drag.get(i).killDragon();
-					}else{
-						heroi.set_alive(false);
-						System.out.println("You are Dead !");
-					}
+			if(drag.get(i).get_sleeping()){
+				if(heroi.getArmado() && heroi.get_x()==drag.get(i).get_x() && heroi.get_y()==drag.get(i).get_y()){
+					drag.get(i).killDragon();
 				}
-			}else{
-				if((lab.getLabyrinth()[heroi.get_x()+1][heroi.get_y()] == lab.getLabyrinth()[drag.get(i).get_x()][drag.get(i).get_y()]) || (lab.getLabyrinth()[heroi.get_x()-1][heroi.get_y()] == lab.getLabyrinth()[drag.get(i).get_x()][drag.get(i).get_y()]) || (lab.getLabyrinth()[heroi.get_x()][heroi.get_y()+1] == lab.getLabyrinth()[drag.get(i).get_x()][drag.get(i).get_y()]) || (lab.getLabyrinth()[heroi.get_x()][heroi.get_y()-1] == lab.getLabyrinth()[drag.get(i).get_x()][drag.get(i).get_y()]) || (lab.getLabyrinth()[heroi.get_x()][heroi.get_y()] == lab.getLabyrinth()[drag.get(i).get_x()][drag.get(i).get_y()])){
-					if(heroi.getArmado()){
-						drag.get(i).killDragon();
+			}
+			else{
+				if(heroi.getArmado() && heroi.get_x()==drag.get(i).get_x() && heroi.get_y()==drag.get(i).get_y()){
+					drag.get(i).killDragon();
+				}else if(!heroi.getArmado()){
+					if((heroi.get_x()+1==drag.get(i).get_x() && heroi.get_y()==drag.get(i).get_y()) || (heroi.get_x()-1==drag.get(i).get_x() && heroi.get_y()==drag.get(i).get_y()) || (heroi.get_x()==drag.get(i).get_x() && heroi.get_y()+1==drag.get(i).get_y()) || (heroi.get_x()==drag.get(i).get_x() && heroi.get_y()==drag.get(i).get_y()-1) || (heroi.get_x()==drag.get(i).get_x() && heroi.get_y()==drag.get(i).get_y())){
+						heroi.set_alive(false);
+						System.out.println("You are Dead!");
 					}
 				}
 			}
 		}
-
 
 		//verifica espada
 		if(!heroi.getArmado()){
@@ -77,13 +75,18 @@ public class Game{
 		//verifica passaro
 		if(!heroi.getArmado()){
 			if(bird.get_x()==espada.get_x() && bird.get_y()==espada.get_y()){
-				bird.setTravelling(true);
+				espada.set_equiped(true);
+				bird.setHas_Sword(true);
+				lab.getLabyrinth()[espada.get_x()][espada.get_y()]=' ';
 			}
 		}
 		if(bird.get_alive()){
 			for(int i=0; i<drag.size(); i++){
 				if(!drag.get(i).get_sleeping() && drag.get(i).get_x()==bird.get_x() && drag.get(i).get_y()==bird.get_y()){
 					bird.KillsEagle(espada);
+					if(bird.getTravelling()){
+						System.out.println("The Eagle has been killed by a Dragon");
+					}
 				}
 			}
 		}
@@ -115,7 +118,6 @@ public class Game{
 					CheckPositions();
 				}
 			}
-			CheckPositions();
 			heroi.movement(userInput, bird);
 			CheckPositions();
 			if(bird.getTravelling()){
@@ -131,14 +133,12 @@ public class Game{
 			for(int i=0; i<drag.size(); i++){
 				if(sleepingDragon==true){
 					drag.get(i).movement_sleep();
-					CheckPositions();
 				}else{
 					drag.get(i).movement();
-					CheckPositions();
 				}
 			}
-			CheckPositions();
 			heroi.movement(userInput, bird);
+			CheckPositions();
 			CheckExit();
 		}
 
