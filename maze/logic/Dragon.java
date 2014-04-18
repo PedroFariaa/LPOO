@@ -1,112 +1,144 @@
 package maze.logic;
 
-import java.util.ArrayList;
-
 public class Dragon extends Elements{
 	private boolean alive;
-	private boolean asleep;
-	private Labirinth lab;
-	
-	public Dragon(Labirinth lab){
+	private boolean sleeping;
+	private Labyrinth lab;
+
+	public Dragon(Labyrinth lab){
 		this.lab=lab;
 		this.randomPos(lab);
 		this.alive=true;
-		this.asleep=false;
+		this.sleeping=false;
 	}
 
 	public void set_alive(boolean alive){
 		this.alive=alive;
 	}
-	
+
 	public boolean get_alive(){
 		return this.alive;
 	}
-	
-	public void set_asleep(boolean asleep){
-		this.asleep=asleep;
+
+	public void set_sleeping(boolean sleeping){
+		this.sleeping=sleeping;
+	}
+
+	public boolean get_sleeping(){
+		return this.sleeping;
 	}
 	
-	public boolean get_asleep(){
-		return this.asleep;
-	}
-	
-	public void ShowDragon(Labirinth lab){
+	public void ShowDragon(Labyrinth lab, Sword espada){
 		if(this.alive){
-			if(lab.labirinth[this.get_x()][this.get_y()] != 'E' ){
-				lab.labirinth[this.get_x()][this.get_y()]='D';
+			if(this.get_x()==espada.get_x() && this.get_y()==espada.get_y()){
+				lab.getLabyrinth()[this.get_x()][this.get_y()]='F';
+			}else if(this.get_sleeping()){
+				lab.getLabyrinth()[this.get_x()][this.get_y()]='Z';
 			}else{
-				lab.labirinth[this.get_x()][this.get_y()]='F';
+				lab.getLabyrinth()[this.get_x()][this.get_y()]='D';
 			}
 		}else{
-			lab.labirinth[this.get_x()][this.get_y()]=' ';
+			lab.getLabyrinth()[this.get_x()][this.get_y()]=' ';
 		}
 	}
-	
-	public void movement(){
+
+	public void movement_sleep(){
 		int move = (int)(Math.random() * 5);
 		if(this.get_alive()==true){
 			switch(move){
 			case 0:
-				this.set_asleep(false);
-				if(!(lab.labirinth[this.get_x()+1][this.get_y()] == 'X') &&
-						!(lab.labirinth[this.get_x()+1][this.get_y()] == 'S') && this.get_x() < 9){
-					lab.labirinth[this.get_x()][this.get_y()]=' ';
+				this.set_sleeping(false);
+				if(!(lab.getLabyrinth()[this.get_x()+1][this.get_y()] == 'X') &&
+						!(lab.getLabyrinth()[this.get_x()+1][this.get_y()] == 'S') && this.get_x() < lab.dim-1){
+					lab.getLabyrinth()[this.get_x()][this.get_y()]=' ';
 					this.set_x(this.get_x()+1);
-					lab.labirinth[this.get_x()][this.get_y()]='D';
+					lab.getLabyrinth()[this.get_x()][this.get_y()]='D';
 				}
 				break;
 			case 1:
-				this.set_asleep(false);
-				if(!(lab.labirinth[this.get_x()-1][this.get_y()] == 'X') &&
-						!(lab.labirinth[this.get_x()-1][this.get_y()] == 'S') && this.get_x() > 0){
-					lab.labirinth[this.get_x()][this.get_y()]=' ';
+				this.set_sleeping(false);
+				if(!(lab.getLabyrinth()[this.get_x()-1][this.get_y()] == 'X') &&
+						!(lab.getLabyrinth()[this.get_x()-1][this.get_y()] == 'S') && this.get_x() > 0){
+					lab.getLabyrinth()[this.get_x()][this.get_y()]=' ';
 					this.set_x(this.get_x()-1);
-					lab.labirinth[this.get_x()][this.get_y()]='D';
+					lab.getLabyrinth()[this.get_x()][this.get_y()]='D';
 				}
 				break;
 			case 2:
-				this.set_asleep(false);
-				if(!(lab.labirinth[this.get_x()][this.get_y()+1] == 'X') &&
-						!(lab.labirinth[this.get_x()][this.get_y()+1] == 'S') && this.get_y() < 9){
-					lab.labirinth[this.get_x()][this.get_y()]=' ';
+				this.set_sleeping(false);
+				if(!(lab.getLabyrinth()[this.get_x()][this.get_y()+1] == 'X') &&
+						!(lab.getLabyrinth()[this.get_x()][this.get_y()+1] == 'S') && this.get_y() < lab.dim-1){
+					lab.getLabyrinth()[this.get_x()][this.get_y()]=' ';
 					this.set_y(this.get_y()+1);
-					lab.labirinth[this.get_x()][this.get_y()]='D';
+					lab.getLabyrinth()[this.get_x()][this.get_y()]='D';
 				}
 				break;
 			case 3:
-				this.set_asleep(false);
-				if(!(lab.labirinth[this.get_x()][this.get_y()-1] == 'X') &&
-						!(lab.labirinth[this.get_x()][this.get_y()-1] == 'S') && this.get_y() > 0){
-					lab.labirinth[this.get_x()][this.get_y()]=' ';
+				this.set_sleeping(false);
+				if(!(lab.getLabyrinth()[this.get_x()][this.get_y()-1] == 'X') && !(lab.getLabyrinth()[this.get_x()][this.get_y()-1] == 'S') && this.get_y() > 0){
+					lab.getLabyrinth()[this.get_x()][this.get_y()]=' ';
 					this.set_y(this.get_y()-1);
-					lab.labirinth[this.get_x()][this.get_y()]='D';
+					lab.getLabyrinth()[this.get_x()][this.get_y()]='D';
 				}
 				break;
 			case 4:
-				this.set_asleep(true);
-				if(this.get_asleep()){
-					lab.labirinth[this.get_x()][this.get_y()]='Z';
+				this.set_sleeping(true);
+				if(this.get_sleeping()){
+					lab.getLabyrinth()[this.get_x()][this.get_y()]='Z';
 				}
 			}
+		}else{
+			lab.getLabyrinth()[this.get_x()][this.get_y()] = ' ';
+		}
+	}
+
+	public void movement(){
+		int move = (int)(Math.random() * 4);
+		if(this.get_alive()==true){
+			switch(move){
+			case 0:
+				if(!(lab.getLabyrinth()[this.get_x()+1][this.get_y()] == 'X') && !(lab.getLabyrinth()[this.get_x()+1][this.get_y()] == 'S') && this.get_x() < lab.dim-1){
+					lab.getLabyrinth()[this.get_x()][this.get_y()]=' ';
+					this.set_x(this.get_x()+1);
+					lab.getLabyrinth()[this.get_x()][this.get_y()]='D';
+				}
+				break;
+			case 1:
+				if(!(lab.getLabyrinth()[this.get_x()-1][this.get_y()] == 'X') && !(lab.getLabyrinth()[this.get_x()-1][this.get_y()] == 'S') && this.get_x() > 0){
+					lab.getLabyrinth()[this.get_x()][this.get_y()]=' ';
+					this.set_x(this.get_x()-1);
+					lab.getLabyrinth()[this.get_x()][this.get_y()]='D';
+				}
+				break;
+			case 2:
+				if(!(lab.getLabyrinth()[this.get_x()][this.get_y()+1] == 'X') && !(lab.getLabyrinth()[this.get_x()][this.get_y()+1] == 'S') && this.get_y() < lab.dim-1){
+					lab.getLabyrinth()[this.get_x()][this.get_y()]=' ';
+					this.set_y(this.get_y()+1);
+					lab.getLabyrinth()[this.get_x()][this.get_y()]='D';
+				}
+				break;
+			case 3:
+				this.set_sleeping(false);
+				if(!(lab.getLabyrinth()[this.get_x()][this.get_y()-1] == 'X') && !(lab.getLabyrinth()[this.get_x()][this.get_y()-1] == 'S') && this.get_y() > 0){
+					lab.getLabyrinth()[this.get_x()][this.get_y()]=' ';
+					this.set_y(this.get_y()-1);
+					lab.getLabyrinth()[this.get_x()][this.get_y()]='D';
+				}
+				break;
+			}
+		}else{
+			lab.getLabyrinth()[this.get_x()][this.get_y()] = ' ';
 		}
 	}
 	
 	public void killDragon(){
-		this.set_alive(false);
-		for(int i =0; i< lab.labirinth.length; i++){
-			for(int j=0; j<lab.labirinth.length; j++){
-				if((lab.labirinth[i][j]=='D') || (lab.labirinth[i][j]=='Z')){
-					lab.labirinth[i][j]=' ';
-				}
-			}
+		if(this.get_alive()==true){
+			this.set_alive(false);
+			System.out.println("The Dragon Was Killed!");
 		}
-		System.out.println("The Dragon Was Killed!");
 	}
-	
-	void placeDragons(ArrayList<Dragon> d, int numb, Labirinth lab){
-		for(int i=0; i<numb; i++){
-			Dragon d1 = new Dragon(lab);
-			d.add(d1);
-		}
+
+	public void wake() {
+		this.sleeping=false;
 	}
 }
