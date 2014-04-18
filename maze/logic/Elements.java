@@ -20,10 +20,10 @@ public class Elements{
 		return this.y_pos;
 	}
 
-	public void randomPos(Labirinth lab){
-		while( (lab.labirinth[this.get_x()][this.get_y()] == 'X') || (lab.labirinth[this.get_x()][this.get_y()] == 'S') || (lab.labirinth[this.get_x()][this.get_y()] == 'D')){
-			int a = (int)(Math.random() * 10);
-			int b = (int)(Math.random() * 10);
+	public void randomPos(Labyrinth lab){
+		while( (lab.getLabyrinth()[this.get_x()][this.get_y()] == 'X') || (lab.getLabyrinth()[this.get_x()][this.get_y()] == 'S') || (lab.getLabyrinth()[this.get_x()][this.get_y()] == 'D')){
+			int a = (int)(Math.random() * lab.dim);
+			int b = (int)(Math.random() * lab.dim);
 			this.set_x(a);
 			this.set_y(b);
 		}	

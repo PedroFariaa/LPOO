@@ -3,7 +3,7 @@ package maze.logic;
 public class Sword extends Elements{
 	private boolean equiped;	
 	
-	public Sword(Labirinth lab){
+	public Sword(Labyrinth lab){
 		this.randomPos(lab);
 		this.equiped=false;
 	}
@@ -12,11 +12,11 @@ public class Sword extends Elements{
 		return this.equiped;
 	}
 	
-	public void ShowSword(Labirinth lab){
+	public void ShowSword(Labyrinth lab){
 		if(this.equiped == true){
-			lab.labirinth[this.get_x()][this.get_y()]=' ';
+			lab.getLabyrinth()[this.get_x()][this.get_y()]=' ';
 		}else{
-			lab.labirinth[this.get_x()][this.get_y()]='E';
+			lab.getLabyrinth()[this.get_x()][this.get_y()]='E';
 		}
 	}
 	
