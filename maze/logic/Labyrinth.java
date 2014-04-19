@@ -17,7 +17,7 @@ public class Labyrinth{
 	}
 
 	public Labyrinth(){
-		this.setLabyrinth(this.Random_maze(17));
+		this.setLabyrinth(this.Default_maze());
 	}
 
 	public char[][] Default_maze(){

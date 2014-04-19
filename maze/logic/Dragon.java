@@ -1,7 +1,7 @@
 package maze.logic;
 
 public class Dragon extends Elements{
-	private boolean alive;
+	public boolean alive;
 	private boolean sleeping;
 	private Labyrinth lab;
 

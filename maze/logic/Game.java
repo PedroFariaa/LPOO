@@ -14,6 +14,7 @@ public class Game{
 	Display dis = new Display();
 	Elements exit = new Elements();
 	boolean FoundExit=false;
+	
 
 	public Game(Labyrinth lab, Sword espada, Hero heroi, Elements exit, Vector<Dragon> drag){
 		this.lab=lab;
