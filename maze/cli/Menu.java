@@ -16,8 +16,8 @@ public class Menu {
 	public boolean SleepingDragon(Game g){
 		String s; boolean res;
 		System.out.println("Choose Y if you want your dragon to sleep or N if you don't");
-		Scanner scan2 = new Scanner (System.in);
-		s = scan2.next();
+		Scanner scan3 = new Scanner (System.in);
+		s = scan3.next();
 		if(s == "N" || s == "n"){
 			res = false;
 		}else{
@@ -30,7 +30,7 @@ public class Menu {
 		Menu m = new Menu();
 		Game g1 = new Game();
 		m.Number_dragons(g1);
-		boolean sleep=m.SleepingDragon(g1);
+		boolean sleep = m.SleepingDragon(g1);
 		g1.PlayGame(sleep);
 	}
 
