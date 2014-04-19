@@ -13,11 +13,16 @@ public class Display{
 			}
 			System.out.println();
 		}
+		System.out.println();
 	}
 
 
-	// ADAPT FUNCTION SO IT CAN DRAW MULTIPLE DRAGONS
 	private void DrawAllElements(Labyrinth lab, Hero h, Vector<Dragon> drag, Sword s, Eagle e) {
+
+		//draws the sword
+		if(!s.get_equiped()){
+			lab.getLabyrinth()[s.get_x()][s.get_y()] = 'E';
+		}
 
 		//draws the Hero
 		if(h.get_alive()){
@@ -28,11 +33,6 @@ public class Display{
 			}
 		}
 
-		//draws the sword
-		if(!s.get_equiped()){
-			lab.getLabyrinth()[s.get_x()][s.get_y()] = 'E';
-		}
-		
 		//draws the dragon(s)
 		for(int i=0; i<drag.size(); i++){
 			if(drag.get(i).get_alive()){
@@ -60,6 +60,13 @@ public class Display{
 			lab.getLabyrinth()[e.get_x()][e.get_y()] = 'B';
 		}else if(e.get_alive() && e.getTravelling() && e.getHas_sword()){
 			lab.getLabyrinth()[e.get_x()][e.get_y()] = 'E';
+		}else if(h.getArmado()){
+			if(h.get_x()==s.get_x() && h.get_y()==s.get_y()){
+				lab.getLabyrinth()[s.get_x()][s.get_y()] = 'A';
+			}else{
+				lab.getLabyrinth()[s.get_x()][s.get_y()] = ' ';
+			}
 		}
+
 	}	
 }
