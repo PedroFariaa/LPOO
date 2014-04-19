@@ -15,10 +15,6 @@ public class Game{
 	Elements exit = new Elements();
 	boolean FoundExit=false;
 
-	public Game(int n){
-		this.lab = new Labyrinth(n);
-	}
-
 	public Game(Labyrinth lab, Sword espada, Hero heroi, Elements exit, Vector<Dragon> drag){
 		this.lab=lab;
 		this.espada=espada;
@@ -69,15 +65,33 @@ public class Game{
 			if(heroi.get_x()==espada.get_x() && heroi.get_y()==espada.get_y()){
 				heroi.setArmado();
 				espada.set_equiped(true);
+				bird.KillsEagle(espada);
 			}
 		}
 
 		//verifica passaro
+		if(bird.getTravelling() && bird.getHas_sword()){
+			if(bird.get_x()==heroi.get_x() && bird.get_y()==heroi.get_y()){
+				espada.set_equiped(true);
+				bird.setHas_Sword(true);
+				heroi.setArmado(true);
+			}
+		}
+
 		if(!heroi.getArmado()){
 			if(bird.get_x()==espada.get_x() && bird.get_y()==espada.get_y()){
 				espada.set_equiped(true);
 				bird.setHas_Sword(true);
-				lab.getLabyrinth()[espada.get_x()][espada.get_y()]=' ';
+				for(int a=0; a<lab.dim-1; a++){
+					for(int b=0; b<lab.dim-1; b++){
+						if(lab.getLabyrinth()[a][b]=='E'){
+							lab.getLabyrinth()[a][b]=' ';
+						}
+					}
+				}
+				if(!espada.get_equiped() && bird.get_alive() && !heroi.getArmado()){
+					lab.getLabyrinth()[bird.get_x()][bird.get_y()]='E';
+				}
 			}
 		}
 		if(bird.get_alive()){
@@ -119,10 +133,12 @@ public class Game{
 				}
 			}
 			heroi.movement(userInput, bird);
+			dis.DisplayMap(lab, heroi, drag, espada, bird);
 			CheckPositions();
 			if(bird.getTravelling()){
-				bird.Movement(espada);
+				bird.Movement(espada, heroi);
 			}
+			dis.DisplayMap(lab, heroi, drag, espada, bird);
 			CheckPositions();
 		}
 		while(FoundExit == false){
@@ -133,11 +149,14 @@ public class Game{
 			for(int i=0; i<drag.size(); i++){
 				if(sleepingDragon==true){
 					drag.get(i).movement_sleep();
+					dis.DisplayMap(lab, heroi, drag, espada, bird);
 				}else{
 					drag.get(i).movement();
+					dis.DisplayMap(lab, heroi, drag, espada, bird);
 				}
 			}
 			heroi.movement(userInput, bird);
+			dis.DisplayMap(lab, heroi, drag, espada, bird);
 			CheckPositions();
 			CheckExit();
 		}
