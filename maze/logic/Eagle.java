@@ -42,9 +42,9 @@ public class Eagle extends Elements{
 		}
 	}
 
-	public void Movement(Sword espada){
+	public void Movement(Sword espada, Hero heroi){
 		if(this.has_sword){
-			this.return_movement(espada);
+			this.return_movement(espada, heroi);
 		}else{
 			this.going_movement(espada);
 		}
@@ -106,10 +106,10 @@ public class Eagle extends Elements{
 
 
 
-	public void return_movement(Sword espada){
-		if(this.get_alive()==true){
+	public void return_movement(Sword espada, Hero heroi){
+		if(this.get_alive()==true && !heroi.getArmado()){
 			if(this.get_x() == this.getInitialX() && this.get_y()==this.getInitialY()){
-				this.KillsEagle(espada);
+//				this.EndsMovement(espada);
 			}
 			//mesma linha
 			else if(this.get_x() == this.getInitialX()){
@@ -174,13 +174,22 @@ public class Eagle extends Elements{
 		}
 	}
 
+	public void EndsMovement(Sword espada) {
+		espada.set_x(this.get_x());
+		espada.set_y(this.get_y());
+		espada.set_equiped(false);
+		this.alive=false;
+	}
+
 	public void KillsEagle(Sword espada) {
 		if(this.getHas_sword()){
 			espada.set_x(this.get_x());
 			espada.set_y(this.get_y());
 			espada.set_equiped(false);
+			lab.getLabyrinth()[this.get_x()][this.get_y()]='E';
 		}
 		this.setTravelling(false);
+		lab.getLabyrinth()[this.get_x()][this.get_y()]=this.previous_cell;
 		this.alive=false;
 	}
 
@@ -188,7 +197,6 @@ public class Eagle extends Elements{
 		return travelling;
 	}
 
-	//true when the player press the 'e' key until the bird return to the initial position with the sword
 	public void setTravelling(boolean trav) {
 		this.travelling=trav;
 	}
