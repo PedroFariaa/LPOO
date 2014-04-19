@@ -15,7 +15,7 @@ public class hero_tests {
 	Vector<Dragon> drag = new Vector<Dragon> ();
 	Elements exit = new Elements();
 	Game g = new Game(lab, espada, heroi, exit, drag);
-	
+
 	@Test
 	public void test_MoveToFreeCell(){
 		heroi.set_x(3);
@@ -126,13 +126,14 @@ public class hero_tests {
 		drag.get(0).set_x(1);
 		drag.get(0).set_y(3);
 		
+		espada.set_equiped(true);
 		heroi.setArmado(true);
-		heroi.movement("d", bird);
-		drag.get(0).set_x(1);
-		drag.get(0).set_y(3);
+		assertEquals(1, drag.size());
 		drag.get(0).wake();
+		assertEquals(false, drag.get(0).get_sleeping());
+		drag.get(0).set_x(1);
+		drag.get(0).set_y(1);
 		g.CheckPositions();
-		heroi.movement("d", bird);
 		
 		assertEquals(true, heroi.get_alive());
 		assertEquals(false, drag.get(0).get_alive());
@@ -155,7 +156,7 @@ public class hero_tests {
 		assertEquals(true, heroi.getArmado());
 		
 		heroi.movement("s", bird);
-		drag.get(0).set_x(4);
+		drag.get(0).set_x(3);
 		drag.get(0).set_y(8);
 		g.CheckPositions();
 		
