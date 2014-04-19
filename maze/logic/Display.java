@@ -36,10 +36,10 @@ public class Display{
 		//draws the dragon(s)
 		for(int i=0; i<drag.size(); i++){
 			if(drag.get(i).get_alive()){
-				if(drag.get(i).get_sleeping()){
-					lab.getLabyrinth()[drag.get(i).get_x()][drag.get(i).get_y()] = 'Z';
-				}else{
+				if(!drag.get(i).get_sleeping()){
 					lab.getLabyrinth()[drag.get(i).get_x()][drag.get(i).get_y()] = 'D';
+				}else{
+					lab.getLabyrinth()[drag.get(i).get_x()][drag.get(i).get_y()] = 'Z';
 				}
 			}
 			if(drag.get(i).get_alive() && !s.get_equiped()){

@@ -32,10 +32,10 @@ public class Dragon extends Elements{
 		if(this.alive){
 			if(this.get_x()==espada.get_x() && this.get_y()==espada.get_y()){
 				lab.getLabyrinth()[this.get_x()][this.get_y()]='F';
-			}else if(this.get_sleeping()){
-				lab.getLabyrinth()[this.get_x()][this.get_y()]='Z';
-			}else{
+			}else if(!this.get_sleeping()){
 				lab.getLabyrinth()[this.get_x()][this.get_y()]='D';
+			}else{
+				lab.getLabyrinth()[this.get_x()][this.get_y()]='Z';
 			}
 		}else{
 			lab.getLabyrinth()[this.get_x()][this.get_y()]=' ';
@@ -98,6 +98,7 @@ public class Dragon extends Elements{
 			switch(move){
 			case 0:
 				if(!(lab.getLabyrinth()[this.get_x()+1][this.get_y()] == 'X') && !(lab.getLabyrinth()[this.get_x()+1][this.get_y()] == 'S') && this.get_x() < lab.dim-1){
+					this.set_sleeping(false);
 					lab.getLabyrinth()[this.get_x()][this.get_y()]=' ';
 					this.set_x(this.get_x()+1);
 					lab.getLabyrinth()[this.get_x()][this.get_y()]='D';
@@ -105,6 +106,7 @@ public class Dragon extends Elements{
 				break;
 			case 1:
 				if(!(lab.getLabyrinth()[this.get_x()-1][this.get_y()] == 'X') && !(lab.getLabyrinth()[this.get_x()-1][this.get_y()] == 'S') && this.get_x() > 0){
+					this.set_sleeping(false);
 					lab.getLabyrinth()[this.get_x()][this.get_y()]=' ';
 					this.set_x(this.get_x()-1);
 					lab.getLabyrinth()[this.get_x()][this.get_y()]='D';
@@ -112,6 +114,7 @@ public class Dragon extends Elements{
 				break;
 			case 2:
 				if(!(lab.getLabyrinth()[this.get_x()][this.get_y()+1] == 'X') && !(lab.getLabyrinth()[this.get_x()][this.get_y()+1] == 'S') && this.get_y() < lab.dim-1){
+					this.set_sleeping(false);
 					lab.getLabyrinth()[this.get_x()][this.get_y()]=' ';
 					this.set_y(this.get_y()+1);
 					lab.getLabyrinth()[this.get_x()][this.get_y()]='D';
@@ -120,6 +123,7 @@ public class Dragon extends Elements{
 			case 3:
 				this.set_sleeping(false);
 				if(!(lab.getLabyrinth()[this.get_x()][this.get_y()-1] == 'X') && !(lab.getLabyrinth()[this.get_x()][this.get_y()-1] == 'S') && this.get_y() > 0){
+					this.set_sleeping(false);
 					lab.getLabyrinth()[this.get_x()][this.get_y()]=' ';
 					this.set_y(this.get_y()-1);
 					lab.getLabyrinth()[this.get_x()][this.get_y()]='D';
