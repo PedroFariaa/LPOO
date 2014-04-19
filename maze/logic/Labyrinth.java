@@ -17,11 +17,7 @@ public class Labyrinth{
 	}
 
 	public Labyrinth(){
-		this.setLabyrinth(this.Default_maze());
-	}
-	
-	public Labyrinth(int n){
-		this.labyrinth = this.Random_maze(n);
+		this.setLabyrinth(this.Random_maze(17));
 	}
 
 	public char[][] Default_maze(){
@@ -61,29 +57,29 @@ public class Labyrinth{
 		int exitX, exitY;
 		int direction= (int)(Math.random() * 2); //0->horizontal    1->vertical
 		int exit1= (int)(Math.random() * 2);
-		int exit2= (int)(Math.random() * size+1);
+		int exit2= (int)(Math.random() * size-2);
 		if(direction==0){
 			if(exit1==0){
-				getLabyrinth()[0][exit2]='S';
-				getLabyrinth()[1][exit2]=' ';
+				getLabyrinth()[0][exit2+1]='S';
+				getLabyrinth()[1][exit2+1]=' ';
 				exitX = 0;
-				exitY = exit2;
+				exitY = exit2+1;
 			}else{
-				getLabyrinth()[size-1][exit2]='S';
-				getLabyrinth()[size-2][exit2]=' ';
+				getLabyrinth()[size-1][exit2+1]='S';
+				getLabyrinth()[size-2][exit2+1]=' ';
 				exitX = size-1;
-				exitY = exit2;
+				exitY = exit2+1;
 			}
 		}
 		else{
 			if(exit1==0){
-				getLabyrinth()[exit2][0]='S';
-				getLabyrinth()[exit2][1]=' ';
-				exitX = exit2;
+				getLabyrinth()[exit2+1][0]='S';
+				getLabyrinth()[exit2+1][1]=' ';
+				exitX = exit2+1;
 				exitY = 0;
 			}else{
-				getLabyrinth()[exit2][size-1]='S';
-				getLabyrinth()[exit2][size-2]=' ';
+				getLabyrinth()[exit2+1][size-1]='S';
+				getLabyrinth()[exit2+1][size-2]=' ';
 				exitX = size-1;
 				exitY = 0;
 			}
