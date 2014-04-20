@@ -3,18 +3,38 @@ import java.util.Scanner;
 
 import maze.logic.Game;
 
+/**
+ * Menu.java - Allows the user to configure game in command line interface
+ * @author Pedro Faria 
+ * @author Guilherme Routar
+ * @version 1.0
+ */
 public class Menu {
 
 	Scanner scan = new Scanner(System.in);
 	boolean random = false;
 	
+	/**
+	 * Asks the Player with how many dragons the want to play with
+	 * 
+	 * @param g
+	 * 			the game itself
+	 */
 	private void Number_dragons(Game g){
 		int n_dragons;
 		System.out.println("choose the number of dragons you expect to find");
 		n_dragons = scan.nextInt();
 		g.InitializeDragons(n_dragons);
 	}
-
+	
+	/**
+	 * Asks the Player if he/she wants to play against sleeping dragons or not
+	 * 
+	 * @param g
+	 * 			the game itself
+	 * 
+	 * @return the Dragon behavior
+	 */
 	private boolean SleepingDragon(Game g){
 		String s; boolean res;
 		System.out.println("Choose Y if you want your dragon to sleep or N if you don't");
@@ -43,6 +63,11 @@ public class Menu {
 //		return size;
 //	}
 
+	/**
+	 * Main function
+	 * 
+	 * @param argc
+	 */
 	public static void main(String[] argc){
 //		boolean rand = false;
 //		int s=11;

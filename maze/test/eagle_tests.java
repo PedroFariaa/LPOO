@@ -13,7 +13,12 @@ import maze.logic.Game;
 import maze.logic.Hero;
 import maze.logic.Labyrinth;
 import maze.logic.Sword;
-
+/**
+ * Tests eagle features in the game
+ * @author Pedro Faria 
+ * @author Guilherme Routar
+ * @version 1.0
+ */
 public class eagle_tests {
 
 	Labyrinth lab = new Labyrinth();
@@ -35,7 +40,7 @@ public class eagle_tests {
 		bird.set_y(heroi.get_y());
 		heroi.movement("e", bird);
 		assertEquals(true, bird.get_alive());
-		assertEquals(true, bird.getTravelling());
+		assertEquals(true, bird.getTraveling());
 		int numb_movs=0;
 		while(bird.get_x()!=espada.get_x() || bird.get_y()!=espada.get_y()){
 			bird.Movement(espada, heroi);
@@ -60,7 +65,7 @@ public class eagle_tests {
 		bird.setInitialY(heroi.get_y());
 		g.CheckPositions();
 		
-		assertEquals(true, bird.getTravelling());
+		assertEquals(true, bird.getTraveling());
 		assertEquals(true, bird.getHas_sword());
 
 		while(bird.get_x()!=bird.getInitialX() || bird.get_y()!=bird.getInitialY()){

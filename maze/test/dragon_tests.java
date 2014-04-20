@@ -13,7 +13,12 @@ import maze.logic.Labyrinth;
 import maze.logic.Sword;
 
 import org.junit.Test;
-
+/**
+ * Tests complex features of the game related with multiple dragons
+ * @author Pedro Faria 
+ * @author Guilherme Routar
+ * @version 1.0
+ */
 public class dragon_tests {
 
 	Labyrinth lab = new Labyrinth();

@@ -5,7 +5,12 @@ import java.util.Vector;
 import maze.logic.*;
 import static org.junit.Assert.*;
 import org.junit.Test;
-
+/**
+ * Tests simple features of the game
+ * @author Pedro Faria 
+ * @author Guilherme Routar
+ * @version 1.0
+ */
 public class hero_tests {
 	Labyrinth lab = new Labyrinth();
 	Hero heroi = new Hero(lab);
@@ -92,7 +97,7 @@ public class hero_tests {
 		heroi.movement("d", bird);		
 		
 		assertEquals(true, heroi.getArmado());
-		assertEquals(true, espada.get_equiped());
+		assertEquals(true, espada.get_equipped());
 	}
 	
 	@Test
@@ -126,7 +131,7 @@ public class hero_tests {
 		drag.get(0).set_x(1);
 		drag.get(0).set_y(3);
 		
-		espada.set_equiped(true);
+		espada.set_equipped(true);
 		heroi.setArmado(true);
 		assertEquals(1, drag.size());
 		drag.get(0).wake();
