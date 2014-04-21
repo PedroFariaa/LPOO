@@ -11,40 +11,40 @@ public class Map {
 	public Map() {
 		
 		//Maze content
-		ImageIcon img = new ImageIcon("C:\\Users\\Guilherme\\Desktop\\images\\wall.png");
+		ImageIcon img = new ImageIcon("src/maze/gui/images/wall.png");
 		wall = img.getImage();
-		img = new ImageIcon("C:\\Users\\Guilherme\\Desktop\\images\\grass.png");
+		img = new ImageIcon("src/maze/gui/images/grass.png");
 		grass = img.getImage();
 		
 		//Hero
-		img = new ImageIcon("C:\\Users\\Guilherme\\Desktop\\images\\hero.png");
+		img = new ImageIcon("src/maze/gui/images/hero.png");
 		hero = img.getImage();
-		img = new ImageIcon("C:\\Users\\Guilherme\\Desktop\\images\\heroBack.png");
+		img = new ImageIcon("src/maze/gui/images/heroBack.png");
 		heroBack = img.getImage();
-		img = new ImageIcon("C:\\Users\\Guilherme\\Desktop\\images\\heroLeft.png");
+		img = new ImageIcon("src/maze/gui/images/heroLeft.png");
 		heroLeft = img.getImage();
-		img = new ImageIcon("C:\\Users\\Guilherme\\Desktop\\images\\heroRight.png");
+		img = new ImageIcon("src/maze/gui/images/heroRight.png");
 		heroRight = img.getImage();
-		img = new ImageIcon("C:\\Users\\Guilherme\\Desktop\\images\\sword.png");
+		img = new ImageIcon("src/maze/gui/images/sword.png");
 		sword = img.getImage();
-		img = new ImageIcon("C:\\Users\\Guilherme\\Desktop\\images\\heroFrontSword.png");
+		img = new ImageIcon("src/maze/gui/images/heroFrontSword.png");
 		heroFrontSword = img.getImage();
-		img = new ImageIcon("C:\\Users\\Guilherme\\Desktop\\images\\heroRightSword.png");
+		img = new ImageIcon("src/maze/gui/images/heroRightSword.png");
 		heroRightSword = img.getImage();
-		img = new ImageIcon("C:\\Users\\Guilherme\\Desktop\\images\\heroLeftSword.png");
+		img = new ImageIcon("src/maze/gui/images/heroLeftSword.png");
 		heroLeftSword = img.getImage();
 		//Missing eagle 
 		
 		//Dragon
-		img = new ImageIcon("C:\\Users\\Guilherme\\Desktop\\images\\dragon.png");
+		img = new ImageIcon("src/maze/gui/images/dragon.png");
 		dragon = img.getImage();
-		img = new ImageIcon("C:\\Users\\Guilherme\\Desktop\\images\\dragonSleeping.png");
+		img = new ImageIcon("src/maze/gui/images/dragonSleeping.png");
 		dragonSleeping = img.getImage();
-		img = new ImageIcon("C:\\Users\\Guilherme\\Desktop\\images\\dragonLeft.png");
+		img = new ImageIcon("src/maze/gui/images/dragonLeft.png");
 		dragonLeft = img.getImage();
-		img = new ImageIcon("C:\\Users\\Guilherme\\Desktop\\images\\dragonRight.png");
+		img = new ImageIcon("src/maze/gui/images/dragonRight.png");
 		dragonRight = img.getImage();
-		img = new ImageIcon("C:\\Users\\Guilherme\\Desktop\\images\\dragonBack.png");
+		img = new ImageIcon("src/maze/gui/images/dragonBack.png");
 		dragonBack = img.getImage();
 	}
 	
