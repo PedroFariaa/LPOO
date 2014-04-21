@@ -65,6 +65,18 @@ public class GameGUI extends JPanel implements ActionListener{
 		timer.start();
 	}
 
+	/**
+	 * Resizes the Image to fit within the Window
+	 * 
+	 * @param image
+	 * 		Image that will be resized
+	 * @param width
+	 * 		new Image's width
+	 * @param height
+	 * 		new Image's height
+	 * @return
+	 * 		resized Image
+	 */
 	public static BufferedImage resizeImage(Image image, int width, int height) {
 
 		BufferedImage bufferedImage = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
@@ -81,6 +93,9 @@ public class GameGUI extends JPanel implements ActionListener{
 		return bufferedImage;
 	}
 
+	/**
+	 * Paints the Windows with all the Elements
+	 */
 	public void paint(Graphics Gr) {
 
 		requestFocus(true);
@@ -89,29 +104,26 @@ public class GameGUI extends JPanel implements ActionListener{
 		Map P = new Map();
 		int altura=this.getHeight()/A.getLab().getDim();
 		int largura=this.getWidth()/A.getLab().getDim();
-		
+
 		for (int i = 0; i < Board.length; i++) {
 			for (int j = 0; j < Board.length; j++) {
 				char boardSymbol =  M.getLabyrinth()[i][j];
 				if (boardSymbol == 'X')
 					Gr.drawImage(P.getWall(), j * largura, i * altura, largura, altura, Color.black, null);
-				else if (boardSymbol == 'E')
-					Gr.drawImage(P.getSword(), j * largura, i * altura, largura, altura, Color.black, null);
+				else if (boardSymbol == 'E'){
+					if(Ea.getHas_sword()){
+						if(Ea.getPrevious_cell()=='X'){
+							Gr.drawImage(P.getEagleWallSword(), j * largura, i * altura, largura, altura, Color.black, null);
+						}else{
+							Gr.drawImage(P.getEagleGrassSword(), j * largura, i * altura, largura, altura, Color.black, null);
+						}
+					}else{
+						Gr.drawImage(P.getSword(), j * largura, i * altura, largura, altura, Color.black, null);
+					}
+				}
 				else if (boardSymbol == 'D' || boardSymbol == 'F') //Not tested
 				{
 					Gr.drawImage(P.getDragon(), j * largura, i * altura, largura, altura, Color.black, null);
-					/*
-					for (int k = 0; k < D.size(); k++) {
-
-						if (i == D.get(k).get_x() && j == D.get(k).get_y()) { //Determinates which dragon is and
-																			  //draws according to the direction taken by it	
-							String direction = D.get(i).getDirectionTaken();
-							if (direction == "up") Gr.drawImage(P.getDragonBack(), j * 64, i * 64, null);
-							else if (direction == "left") Gr.drawImage(P.getDragonLeft(), j * 64, i * 64, null);
-							else if (direction == "right") Gr.drawImage(P.getDragonRight(), j * 64, i * 64, null);
-							else Gr.drawImage(P.getDragon(), j * 64, i * 64, null);
-						}
-					}*/
 				}
 				else if (boardSymbol == 'Z')
 					Gr.drawImage(P.getDragonSleeping(), j * largura, i * altura, largura, altura, Color.black, null);
@@ -129,20 +141,42 @@ public class GameGUI extends JPanel implements ActionListener{
 					else if (keyCode == KeyEvent.VK_D) Gr.drawImage(P.getHeroRightSword(), j * largura, i * altura, largura, altura, Color.black, null);
 					else Gr.drawImage(P.getHeroFrontSword(), j * largura, i * altura, largura, altura, Color.black, null);
 				}
+				else if (boardSymbol == 'S'){
+					Gr.drawImage(P.getExit(), j * largura, i * altura, largura, altura, Color.black, null);
+				}
 				else Gr.drawImage(P.getGrass(), j * largura, i * altura, largura, altura, Color.black, null);
+				
+				if(boardSymbol == 'B'){
+					if(Ea.getPrevious_cell()=='X'){
+						Gr.drawImage(P.getEagleWall(), j * largura, i * altura, largura, altura, Color.black, null);
+					}else{
+						Gr.drawImage(P.getEagleGrass(), j * largura, i * altura, largura, altura, Color.black, null);
+					}
+				}
 			}
 		}
 	}
 
+	/**
+	 * Repaints the window in order to Update the Game 
+	 */
 	public void actionPerformed(ActionEvent arg0) {
 		repaint();
 	}
 
+	/**
+	 * Set the Key Code
+	 * 
+	 * @param code
+	 * 		new Key code
+	 */
 	public void setKeyCode(int code) {
 		keyCode = code;
 	}
 
-
+	/**
+	 * AListener Class
+	 */
 	public class AListener extends KeyAdapter {
 
 		public void GameGUIOptions() {
@@ -189,10 +223,27 @@ public class GameGUI extends JPanel implements ActionListener{
 			label.add(mainMenu);
 		}
 
+		/**
+		 * Allows the Player to Play the Game
+		 * 
+		 * @param direction
+		 * 		Diretion that the player wants the Hero to move
+		 */
 		public void handleGame(String direction) {
-			A.PlayGame(direction);
+			if(A.getHeroi().get_alive()){
+				A.PlayGame(direction);
+			}
+
+			if(A.FoundExit==true && A.getHeroi().get_alive()){
+				System.out.println("Victory!");
+			}else if(!A.getHeroi().get_alive()){
+				System.out.println("You have died!");
+			}
 		}
 
+		/**
+		 * Check which key was pressed
+		 */
 		public void keyPressed(KeyEvent E) {
 
 			int keyCode = E.getKeyCode();
