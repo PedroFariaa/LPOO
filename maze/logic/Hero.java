@@ -72,7 +72,7 @@ public class Hero extends Elements{
 			switch(input){
 			case "s":
 			case "S":
-				if(!(lab.getLabyrinth()[this.get_x()+1][this.get_y()] == 'X') && this.get_x() < lab.dim-1){
+				if(!(lab.getLabyrinth()[this.get_x()+1][this.get_y()] == 'X') && this.get_x() < lab.getDim()-1){
 					lab.getLabyrinth()[this.get_x()][this.get_y()]=' ';
 					this.set_x(this.get_x()+1);
 					if(!bird.getTraveling()){
@@ -114,7 +114,7 @@ public class Hero extends Elements{
 				break;
 			case "d":
 			case "D":
-				if(!(lab.getLabyrinth()[this.get_x()][this.get_y()+1] == 'X') && this.get_y() < lab.dim-1){
+				if(!(lab.getLabyrinth()[this.get_x()][this.get_y()+1] == 'X') && this.get_y() < lab.getDim()-1){
 					lab.getLabyrinth()[this.get_x()][this.get_y()]=' ';
 					this.set_y(this.get_y()+1);
 					if(!bird.getTraveling()){

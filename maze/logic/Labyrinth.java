@@ -2,26 +2,51 @@ package maze.logic;
 
 import java.util.Random;
 import java.util.Stack;
-
+/**
+ * Labyrinth Class
+ * 
+ * @author Pedro Faria
+ * @author Guilherme Routar
+ */
 public class Labyrinth{
 
 	private char[][]labyrinth;
-	int dim;
+	private int dim;
 
+	/**
+	 * Get Labyrinth's parameter labyrinth
+	 * 
+	 * @return
+	 * 		Labyrinth's parameter labyrinth
+	 */
 	public char[][] getLabyrinth() {
 		return labyrinth;
 	}
 
+	/**
+	 * Set Labyrinth's parameter labyrinth
+	 * 
+	 * @param alive
+	 * 			new Labyrinth's parameter labyrinth
+	 */
 	public void setLabyrinth(char[][] labyrinth) {
 		this.labyrinth = labyrinth;
 	}
 
+	/**
+	 * Constructs and initializes Labyrinth
+	 */
 	public Labyrinth(){
-		this.setLabyrinth(this.Default_maze());
+		this.setLabyrinth(this.Random_maze(17));
 	}
-
+	/**
+	 * Constructs and initializes a Default Labyrinth
+	 * 
+	 * @return
+	 * 		the Default Labyrinth
+	 */
 	public char[][] Default_maze(){
-		dim = 10;
+		setDim(10);
 		char[][] labirinth = {
 				{'X','X','X','X','X','X','X','X','X','X'},
 				{'X',' ',' ',' ',' ',' ',' ',' ',' ','X'},
@@ -37,8 +62,17 @@ public class Labyrinth{
 		return labirinth;
 	}
 
+	/**
+	 * Constructs and initializes a Random Labyrinth with a defined size
+	 * 
+	 * @param size
+	 * 			size of the Random Labyrinth
+	 * 
+	 * @return
+	 * 			the Random Labyrinth
+	 */
 	public char[][] Random_maze(int size){
-		dim=size;
+		setDim(size);
 		this.setLabyrinth(new char[size][size]);
 		boolean[][] visitedCells = new boolean[size-2][size-2];
 
@@ -178,6 +212,26 @@ public class Labyrinth{
 		}
 
 		return getLabyrinth();
+	}
+
+	/**
+	 * Get Labyrinth's parameter dim
+	 * 
+	 * @return
+	 * 		Labyrinth's parameter dim
+	 */
+	public int getDim() {
+		return dim;
+	}
+
+	/**
+	 * Set Labyrinth's parameter dim
+	 * 
+	 * @param alive
+	 * 			new Labyrinth's parameter dim
+	 */
+	public void setDim(int dim) {
+		this.dim = dim;
 	}
 
 

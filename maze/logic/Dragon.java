@@ -11,6 +11,7 @@ public class Dragon extends Elements{
 	public boolean alive;
 	private boolean sleeping;
 	private Labyrinth lab;
+	private String DirectionMoved;
 
 	/**
 	 * Constructs and initializes one Dragon
@@ -97,11 +98,12 @@ public class Dragon extends Elements{
 			case 0:
 				this.set_sleeping(false);
 				if(!(lab.getLabyrinth()[this.get_x()+1][this.get_y()] == 'X') &&
-						!(lab.getLabyrinth()[this.get_x()+1][this.get_y()] == 'S') && this.get_x() < lab.dim-1){
+						!(lab.getLabyrinth()[this.get_x()+1][this.get_y()] == 'S') && this.get_x() < lab.getDim()-1){
 					lab.getLabyrinth()[this.get_x()][this.get_y()]=' ';
 					this.set_x(this.get_x()+1);
 					lab.getLabyrinth()[this.get_x()][this.get_y()]='D';
 				}
+				setDirectionMoved("s");
 				break;
 			case 1:
 				this.set_sleeping(false);
@@ -111,15 +113,17 @@ public class Dragon extends Elements{
 					this.set_x(this.get_x()-1);
 					lab.getLabyrinth()[this.get_x()][this.get_y()]='D';
 				}
+				setDirectionMoved("w");
 				break;
 			case 2:
 				this.set_sleeping(false);
 				if(!(lab.getLabyrinth()[this.get_x()][this.get_y()+1] == 'X') &&
-						!(lab.getLabyrinth()[this.get_x()][this.get_y()+1] == 'S') && this.get_y() < lab.dim-1){
+						!(lab.getLabyrinth()[this.get_x()][this.get_y()+1] == 'S') && this.get_y() < lab.getDim()-1){
 					lab.getLabyrinth()[this.get_x()][this.get_y()]=' ';
 					this.set_y(this.get_y()+1);
 					lab.getLabyrinth()[this.get_x()][this.get_y()]='D';
 				}
+				setDirectionMoved("d");
 				break;
 			case 3:
 				this.set_sleeping(false);
@@ -128,12 +132,14 @@ public class Dragon extends Elements{
 					this.set_y(this.get_y()-1);
 					lab.getLabyrinth()[this.get_x()][this.get_y()]='D';
 				}
+				setDirectionMoved("a");
 				break;
 			case 4:
 				this.set_sleeping(true);
 				if(this.get_sleeping()){
 					lab.getLabyrinth()[this.get_x()][this.get_y()]='Z';
 				}
+				setDirectionMoved("z");
 			}
 		}else{
 			lab.getLabyrinth()[this.get_x()][this.get_y()] = ' ';
@@ -148,12 +154,13 @@ public class Dragon extends Elements{
 		if(this.get_alive()==true){
 			switch(move){
 			case 0:
-				if(!(lab.getLabyrinth()[this.get_x()+1][this.get_y()] == 'X') && !(lab.getLabyrinth()[this.get_x()+1][this.get_y()] == 'S') && this.get_x() < lab.dim-1){
+				if(!(lab.getLabyrinth()[this.get_x()+1][this.get_y()] == 'X') && !(lab.getLabyrinth()[this.get_x()+1][this.get_y()] == 'S') && this.get_x() < lab.getDim()-1){
 					this.set_sleeping(false);
 					lab.getLabyrinth()[this.get_x()][this.get_y()]=' ';
 					this.set_x(this.get_x()+1);
 					lab.getLabyrinth()[this.get_x()][this.get_y()]='D';
 				}
+				setDirectionMoved("s");
 				break;
 			case 1:
 				if(!(lab.getLabyrinth()[this.get_x()-1][this.get_y()] == 'X') && !(lab.getLabyrinth()[this.get_x()-1][this.get_y()] == 'S') && this.get_x() > 0){
@@ -162,14 +169,16 @@ public class Dragon extends Elements{
 					this.set_x(this.get_x()-1);
 					lab.getLabyrinth()[this.get_x()][this.get_y()]='D';
 				}
+				setDirectionMoved("w");
 				break;
 			case 2:
-				if(!(lab.getLabyrinth()[this.get_x()][this.get_y()+1] == 'X') && !(lab.getLabyrinth()[this.get_x()][this.get_y()+1] == 'S') && this.get_y() < lab.dim-1){
+				if(!(lab.getLabyrinth()[this.get_x()][this.get_y()+1] == 'X') && !(lab.getLabyrinth()[this.get_x()][this.get_y()+1] == 'S') && this.get_y() < lab.getDim()-1){
 					this.set_sleeping(false);
 					lab.getLabyrinth()[this.get_x()][this.get_y()]=' ';
 					this.set_y(this.get_y()+1);
 					lab.getLabyrinth()[this.get_x()][this.get_y()]='D';
 				}
+				setDirectionMoved("d");
 				break;
 			case 3:
 				this.set_sleeping(false);
@@ -179,6 +188,7 @@ public class Dragon extends Elements{
 					this.set_y(this.get_y()-1);
 					lab.getLabyrinth()[this.get_x()][this.get_y()]='D';
 				}
+				setDirectionMoved("a");
 				break;
 			}
 		}else{
@@ -201,5 +211,17 @@ public class Dragon extends Elements{
 	 */
 	public void wake() {
 		this.sleeping=false;
+	}
+
+	public String getDirectionMoved() {
+		return DirectionMoved;
+	}
+
+	public void setDirectionMoved(String string) {
+		DirectionMoved = string;
+	}
+
+	public boolean getSleepingDragon() {
+		return this.sleeping;
 	}
 }

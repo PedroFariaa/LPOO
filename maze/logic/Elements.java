@@ -65,8 +65,8 @@ public class Elements{
 	 */
 	public void randomPos(Labyrinth lab){
 		while( (lab.getLabyrinth()[this.get_x()][this.get_y()] == 'X') || (lab.getLabyrinth()[this.get_x()][this.get_y()] == 'S') || (lab.getLabyrinth()[this.get_x()][this.get_y()] == 'D')){
-			int a = (int)(Math.random() * lab.dim);
-			int b = (int)(Math.random() * lab.dim);
+			int a = (int)(Math.random() * lab.getDim());
+			int b = (int)(Math.random() * lab.getDim());
 			this.set_x(a);
 			this.set_y(b);
 		}	
