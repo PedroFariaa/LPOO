@@ -208,6 +208,12 @@ public class Game{
 		}
 	}
 
+	/**
+	 * Allow the Player to Play the Game - optimized to Graphic Interface
+	 * 
+	 * @param direction
+	 * 			direction that the Hero will move
+	 */
 	public void PlayGame(String direction){
 		for(int i=0; i<getDrag().size(); i++){
 			getDrag().get(i).movement_sleep();
@@ -217,14 +223,16 @@ public class Game{
 		CheckPositions();
 		if(getEagle().getTraveling()){
 			getEagle().Movement(espada, getHeroi());
+			dis.DisplayMap(getLab(), getHeroi(), getDrag(), espada, getEagle());
 		}
+		dis.DisplayMap(getLab(), getHeroi(), getDrag(), espada, getEagle());
 		CheckPositions();
 	}
 
 	/**
 	 * Verifies if the Hero is already at the exit Cell
 	 */
-	public void CheckExit() {
+	public boolean CheckExit() {
 		for(int i=0; i < getLab().getLabyrinth().length; i++){
 			for(int j=0; j < getLab().getLabyrinth().length; j++){
 				if(getLab().getLabyrinth()[i][j] == 'S'){
@@ -241,6 +249,7 @@ public class Game{
 			System.out.println("You are free at least!");
 			FoundExit = true;
 		}
+		return FoundExit;
 	}
 
 	/**
@@ -254,46 +263,112 @@ public class Game{
 		}
 	}
 
+	/**
+	 * Get Game's Labyrinth
+	 * 
+	 * @return
+	 * 		Game's Labyrinth
+	 */
 	public Labyrinth getLab() {
 		return lab;
 	}
 
+	/**
+	 * Set Game's Labyrinth
+	 * 
+	 * @param lab
+	 * 		new Game's Labyrinth
+	 */
 	public void setLab(Labyrinth lab) {
 		this.lab = lab;
 	}
 
+	/**
+	 * Get Game's Hero
+	 * 
+	 * @return
+	 * 		Game's Hero
+	 */
 	public Hero getHeroi() {
 		return heroi;
 	}
 
+	/**
+	 * Set Game's Hero
+	 * 
+	 * @param heroi
+	 * 		new Game's Hero
+	 */
 	public void setHeroi(Hero heroi) {
 		this.heroi = heroi;
 	}
 
+	/**
+	 * Get Game itself
+	 * 
+	 * @return
+	 * 		Game itself
+	 */
 	public Game Get_game(){
 		return this;
 	}
 
+	/**
+	 * Get Game's Vector of Dragons
+	 * 
+	 * @return
+	 * 		Game's Dragons
+	 */
 	public Vector<Dragon> getDrag() {
 		return drag;
 	}
 
+	/**
+	 * Set Game's Vector of Dragons
+	 * 
+	 * @param drag
+	 * 		new Game's Vector of Dragons
+	 */
 	public void setDrag(Vector<Dragon> drag) {
 		this.drag = drag;
 	}
 
+	/**
+	 * Get Game's Eagle
+	 * 
+	 * @return
+	 * 		Game's Eagle
+	 */
 	public Eagle getEagle() {
 		return bird;
 	}
 
+	/**
+	 * Set Game's Eagle
+	 * 
+	 * @param bird
+	 * 		new Game's Eagle
+	 */
 	public void setEagle(Eagle bird) {
 		this.bird = bird;
 	}
 
+	/**
+	 * Get Game's Sword
+	 * 
+	 * @return
+	 * 		Game's Sword
+	 */
 	public Sword getEspada() {
 		return this.espada;
 	}
 
+	/**
+	 * Get Game's Display
+	 * 
+	 * @return
+	 * 		Game's Display
+	 */
 	public Display getDisplay() {
 		return dis;
 	}
